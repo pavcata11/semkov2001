@@ -1,10 +1,24 @@
 import Head from 'next/head'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
-import Navbar from '@components/NavBar'
+import { sql, connect } from './database.js'
+
+async function getData() {
+  await connect()
+  try {
+    const result = await sql.query`SELECT * FROM WORKERS`
+    console.log('Result:', result)
+  } catch (error) {
+    console.log('Error:', error.message)
+  }
+}
+
+getData()
+//Data Source=mssql-90045-0.cloudclusters.net,17553; Initial Catalog=SemkovLtd;User ID=pavel;Password=6PINIer724++";
 
 export default function Home() {
   return (
+    
     <div className="container">
       <Head>
         <title>Отчитане на активност Semkov2001</title>
